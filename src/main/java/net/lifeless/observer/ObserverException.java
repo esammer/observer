@@ -15,6 +15,10 @@
  */
 package net.lifeless.observer;
 
+/**
+ * Indicates a failure to process an event.
+ * 
+ */
 public class ObserverException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;

@@ -21,6 +21,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Support object to allow developers to easily add observation to objects
+ * without requiring them to subclass a special class.
+ * 
+ * Developers may add observation support by implementing the {@link Observable}
+ * interface and simply delegating to an instance of this class.
+ * {@link ObserverEvent}s can be dispatched to registered {@link Observer}s by
+ * calling {@link #dispatchEvent(ObserverEvent)}.
+ */
 public class ObserverSupport {
 
   private static final Logger logger = LoggerFactory
@@ -28,16 +37,31 @@ public class ObserverSupport {
 
   private List<Observer> observers;
 
+  /**
+   * Create a new instance of {@link ObserverSupport}.
+   */
   public ObserverSupport() {
     observers = new LinkedList<Observer>();
   }
 
+  /**
+   * Register an {@code observer}.
+   * 
+   * @param observer
+   *          Observer instance that should receive events.
+   */
   public void addObserver(Observer observer) {
     observers.add(observer);
 
     logger.info("Added observer:" + observer);
   }
 
+  /**
+   * Unregister an {@code observer}.
+   * 
+   * @param observer
+   *          Observer instance that should no longer receive events.
+   */
   public void removeObserver(Observer observer) {
     boolean removed;
 
@@ -50,6 +74,15 @@ public class ObserverSupport {
     }
   }
 
+  /**
+   * Synchronously dispatch an {@link ObserverEvent} to all currently registered
+   * {@link Observer}s.
+   * 
+   * @param event
+   *          Event to dispatch.
+   * @throws ObserverException
+   *           Indicates an {@link Observer} failed to handle an event.
+   */
   public void dispatchEvent(ObserverEvent<?> event) throws ObserverException {
     for (Observer observer : observers) {
       observer.onEvent(event);

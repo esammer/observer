@@ -15,10 +15,33 @@
  */
 package net.lifeless.observer;
 
+/**
+ * An interface implemented by objects that are observable.
+ * 
+ * An observable object is one that is instrumented and supports dispatching
+ * events to any attached observers. An observer can register itself to receive
+ * events by calling the {@link #addObserver(Observer)} method, passing itself
+ * as the sole argument.
+ * 
+ */
 public interface Observable {
 
+  /**
+   * Register {@code observer} to receive events for which this object is
+   * instrumented.
+   * 
+   * @param observer
+   *          The object to receive events.
+   */
   public void addObserver(Observer observer);
 
+  /**
+   * Unregister {@code observer} so it no longer receives events from this
+   * object.
+   * 
+   * @param observer
+   *          The object to remove from the observer list.
+   */
   public void removeObserver(Observer observer);
 
 }
