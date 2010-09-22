@@ -39,6 +39,10 @@
 		</developer>
 	</developers>
 
+	<scm>
+		<url>http://github.com/esammer/observer</url>
+	</scm>
+
 	<build>
 		<plugins>
 
