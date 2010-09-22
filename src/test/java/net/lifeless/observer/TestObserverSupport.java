@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 
 public class TestObserverSupport {
 
+  private static final Logger logger = LoggerFactory
+      .getLogger(TestObserverSupport.class);
+
   private ObserverSupport observerSupport;
 
   @Before
@@ -28,7 +31,16 @@ public class TestObserverSupport {
 
     event = ObserverEvent.withTypeAndSubject("test", "Test event");
 
-    observerSupport.dispatchEvent(event);
+    Assert.assertNotNull(event);
+
+    try {
+      observerSupport.dispatchEvent(event);
+    } catch (ObserverException e) {
+      Assert.fail("Caught exception during event dispatching - "
+          + e.getMessage());
+
+      logger.error("Exception follows.", e);
+    }
 
     observer = new DebuggingObserver();
 
@@ -36,8 +48,15 @@ public class TestObserverSupport {
 
     Assert.assertEquals(1, observerSupport.getObservers().size());
 
-    for (int i = 0; i < 10; i++) {
-      observerSupport.dispatchEvent(event);
+    try {
+      for (int i = 0; i < 10; i++) {
+        observerSupport.dispatchEvent(event);
+      }
+    } catch (ObserverException e) {
+      Assert.fail("Caught exception while dispatching events - "
+          + e.getMessage());
+
+      logger.error("Exception follows.", e);
     }
 
     Assert.assertEquals(10, observer.getCount());
