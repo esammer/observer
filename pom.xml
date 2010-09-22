@@ -23,6 +23,22 @@
 	<version>1.0.0</version>
 	<name>Observer</name>
 
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>eric.lifeless.net</id>
+			<name>E. Sammer</name>
+			<email>eric@lifeless.net</email>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
+
 	<build>
 		<plugins>
 
