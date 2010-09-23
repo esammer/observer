@@ -92,6 +92,16 @@ public class ObserverEvent<T> {
     return this;
   }
 
+  public ObserverEvent() {
+    parameters = new HashMap<String, Object>();
+  }
+
+  @Override
+  public String toString() {
+    return "eventType:" + eventType + " subject:" + subject + " parameters:"
+        + parameters;
+  }
+
   public String getEventType() {
     return eventType;
   }
